@@ -1,14 +1,11 @@
 ---
-:backends:
-  - yaml
-:hierarchy:
-  - "%{clientcert}"
-  - "%{application_tier}"
-  - common
+version: 5
+defaults:  # Used for any hierarchy level that omits these keys.
+  datadir: '/etc/puppetlabs/code/environments/%{environment}/hieradata'  # This path is relative to hiera.yaml's directory.
+  data_hash: yaml_data  # Use the built-in YAML backend.
+hierarchy:
+  - name: 'App Environment'
+  - path: '%{facts.application_tier}.yaml'
+  - name: "Common Data"
+  - path: 'commom.yaml'
 
-:yaml:
-# datadir is empty here, so hiera uses its defaults:
-# - /var/lib/hiera on *nix
-# - %CommonAppData%\PuppetLabs\hiera\var on Windows
-# When specifying a datadir, make sure the directory exists.
-  :datadir: "/etc/puppetlabs/puppet/environments/%{environment}/hieradata"
