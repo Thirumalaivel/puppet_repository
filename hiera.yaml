@@ -1,11 +1,13 @@
 ---
+# Hiera 5 Global configuration file
+# We will switch to use modern facts after cutover is complete.
 version: 5
 defaults:  # Used for any hierarchy level that omits these keys.
   datadir: '/etc/puppetlabs/code/environments/%{environment}/hieradata'  # This path is relative to hiera.yaml's directory.
   data_hash: yaml_data  # Use the built-in YAML backend.
 hierarchy:
-  - name: 'App Environment'
-  - path: '%{facts.application_tier}.yaml'
-  - name: "Common Data"
-  - path: 'commom.yaml'
-
+   - name: 'App data'
+     path: "%{application_tier}.yaml"
+   - name: 'Common data'
+     path: 'common.yaml'
+...
