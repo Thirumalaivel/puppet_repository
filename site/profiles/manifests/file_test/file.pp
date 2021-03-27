@@ -4,7 +4,6 @@ class profiles::file_test::file {
     ensure  => present,
     mode    => '0777',
     owner   => 'root',
-    content => "This is for testing profiles";
+    content => epp('profiles/test.epp');
   }
-  notice("Environment is $message")
 }
