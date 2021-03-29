@@ -4,6 +4,6 @@ class profiles::file_test::file {
     ensure  => present,
     mode    => '0777',
     owner   => 'root',
-    content => epp('profiles/test.epp');
+    content => template('profiles/test.erb');
   }
 }
